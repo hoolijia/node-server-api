@@ -1,6 +1,6 @@
 const controller = {
   getUsers: (req, res, next) => {
-    res.status(200).json({success: true, msg: '获取所有用户信息', data: req.data.msg})
+    res.status(200).json({success: true, msg: '获取所有用户信息'})
   },
   getOne: (req, res, next) => {
     res.status(200).json({success: true, msg: `获取${req.params.id}的用户信息`})

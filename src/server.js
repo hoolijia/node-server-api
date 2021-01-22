@@ -1,6 +1,9 @@
 const express = require('express')
 const dotenv = require('dotenv')
 const DemoRouter = require('./router/demo/router')
+const morgan = require('morgan')
+const colors = require('colors')
+// const Logger = require('./common/logger')
 
 module.exports = {
   config: async () => {
@@ -10,14 +13,7 @@ module.exports = {
 
     const app = express()
 
-    // 创建中间件
-    const logger = (req, res, next) => {
-      req.data = {msg: 'hello world'}
-      console.log('中间件运行')
-      next()
-    }
-
-    app.use(logger)
+    app.use(morgan('dev'))
 
     app.use('/api/v1/demo', DemoRouter)
 
