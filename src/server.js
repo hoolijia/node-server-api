@@ -1,9 +1,10 @@
 const express = require('express')
 const dotenv = require('dotenv')
-const DemoRouter = require('./router/demo/router')
 const morgan = require('morgan')
 const colors = require('colors')
-// const Logger = require('./common/logger')
+
+const DemoRouter = require('./router/demo/router')
+const connectDB = require('./config/db')
 
 module.exports = {
   config: async () => {
@@ -11,7 +12,13 @@ module.exports = {
       path: `${process.cwd()}/.env`
     })
 
+    // 连接数据库
+    connectDB()
+
     const app = express()
+
+    // 配置body解析
+    app.use(express.json())
 
     app.use(morgan('dev'))
 
@@ -19,7 +26,14 @@ module.exports = {
 
     const PORT = process.env.PORT || 3000
 
-    app.listen(PORT, console.log(`Server running at ${process.env.NODE_ENV} at ${PORT}`))
+    const server = app.listen(PORT, console.log(`Server running at ${process.env.NODE_ENV} at ${PORT}`))
+
+    process.on('unhandledRejection', (err, promise) => {
+      console.log(`Error: ${err.message}`.red.bold)
+      server.close(() => {
+        process.exit(1)
+      })
+    })
   }
 }
 
