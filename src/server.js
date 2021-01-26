@@ -5,7 +5,7 @@ const colors = require('colors')
 const errorHandler = require('./common/error')
 
 const DemoRouter = require('./router/demo/router')
-const connectDB = require('./config/db')
+const mongoDB = require('./config/mongoDB')
 
 module.exports = {
   config: async () => {
@@ -14,23 +14,24 @@ module.exports = {
     })
 
     // 连接数据库
-    connectDB()
+    mongoDB()
 
     const app = express()
-
     // 配置body解析
     app.use(express.json())
-
+    // 使用morgan中间件
     app.use(morgan('dev'))
-
+    // 挂载路由
     app.use('/api/v1/demo', DemoRouter)
-
-    // 要写到路由挂载之前
     app.use(errorHandler)
 
     const PORT = process.env.PORT || 3000
-
-    const server = app.listen(PORT, console.log(`Server running at ${process.env.NODE_ENV} at ${PORT}`))
+    const server = app.listen(
+      PORT,
+      console.log(
+        `Server running in ${process.env.NODE_ENV} mode on port ${PORT}`.magenta.bold
+      )
+    )
 
     process.on('unhandledRejection', (err, promise) => {
       console.log(`Error: ${err.message}`.red.bold)
@@ -38,6 +39,8 @@ module.exports = {
         process.exit(1)
       })
     })
+
+    return server
   }
 }
 
