@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-const Controller = require('../../business/user/controller')
+const Controller = require('../../business/admin/user/controller')
 
 router.route('/')
   .get(Controller.getUsers)

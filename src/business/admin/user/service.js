@@ -1,4 +1,4 @@
-const User = require('../../model/user')
+const User = require('../../../model/user')
 
 exports.find = async (queryInfo) => {
   const users = await User.find()

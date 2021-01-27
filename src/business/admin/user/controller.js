@@ -1,6 +1,6 @@
-const AsyncHandler = require('../../plug/async')
-const ErrorResponse = require('../../utils/errorResponse')
-const Message = require('../../common/message')
+const AsyncHandler = require('../../../plug/async')
+const ErrorResponse = require('../../../utils/errorResponse')
+const Message = require('../../../common/message')
 const UserService = require('./service')
 
 // 获取所有用户信息
