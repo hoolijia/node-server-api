@@ -8,7 +8,7 @@ exports.getUsers = AsyncHandler(async (req, res) => {
   const list = await DemoService.getList(req)
   res
     .status(200)
-    .json({
+    .send({
       success: true,
       count: list.length,
       data: list

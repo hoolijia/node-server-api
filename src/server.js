@@ -4,7 +4,10 @@ const morgan = require('morgan')
 const colors = require('colors')
 const errorHandler = require('./plug/error')
 
-const DemoRouter = require('./router/demo/router')
+const admin = require('./routers/admin')
+const web = require('./routers/web')
+
+const adminRouter = require('./routers/admin')
 const mongoDB = require('./config/mongoDB')
 
 module.exports = {
@@ -22,7 +25,7 @@ module.exports = {
     // 使用morgan中间件
     app.use(morgan('dev'))
     // 挂载路由
-    app.use('/api/v1/demo', DemoRouter)
+    app.use('/api/admin', adminRouter)
     // 必须要写在挂载路由之后
     app.use(errorHandler)
 
