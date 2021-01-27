@@ -1,13 +1,18 @@
-const AsyncHandler = require('../../common/async')
+const AsyncHandler = require('../../plug/async')
 const ErrorResponse = require('../../utils/errorResponse')
 const DemoService = require('../../business/demo/service')
 const Demo = require('../../model/demo')
 
 // 获取所有用户信息
-exports.getUsers = AsyncHandler(async (req, res, next) => {
+exports.getUsers = AsyncHandler(async (req, res) => {
   const list = await DemoService.getList(req)
-  return list
-  // res.status(200).json({success: true, count: list.length, data: list})
+  res
+    .status(200)
+    .json({
+      success: true,
+      count: list.length,
+      data: list
+    })
 })
 
 // 根据id获取用户信息

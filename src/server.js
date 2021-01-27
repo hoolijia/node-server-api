@@ -2,7 +2,7 @@ const express = require('express')
 const dotenv = require('dotenv')
 const morgan = require('morgan')
 const colors = require('colors')
-const errorHandler = require('./common/error')
+const errorHandler = require('./plug/error')
 
 const DemoRouter = require('./router/demo/router')
 const mongoDB = require('./config/mongoDB')
@@ -23,6 +23,7 @@ module.exports = {
     app.use(morgan('dev'))
     // 挂载路由
     app.use('/api/v1/demo', DemoRouter)
+    // 必须要写在挂载路由之后
     app.use(errorHandler)
 
     const PORT = process.env.PORT || 3000
