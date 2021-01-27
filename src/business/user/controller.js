@@ -1,13 +1,14 @@
 const AsyncHandler = require('../../plug/async')
 const ErrorResponse = require('../../utils/errorResponse')
+const Message = require('../../common/message')
 const UserService = require('./service')
-const User = require('../../model/user')
 
 // 获取所有用户信息
 exports.getUsers = AsyncHandler(async (req, res) => {
   const list = await UserService.find(req)
   res.send({
     success: true,
+    msg: Message.SELECT_SUCCESS,
     count: list.length,
     data: list
   })
@@ -23,6 +24,7 @@ exports.getOne = AsyncHandler(async (req, res, next) => {
   }
   res.send({
     success: true,
+    msg: Message.SELECT_SUCCESS,
     data: user
   })
 })
@@ -32,7 +34,7 @@ exports.createUser = AsyncHandler(async (req, res, next) => {
   const user = await UserService.create(req.body)
   res.send({
     success: true,
-    data: user
+    msg: Message.CREATE_SUCCESS
   })
 })
 
@@ -46,8 +48,7 @@ exports.updateUser = AsyncHandler(async (req, res, next) => {
   }
   res.send({
     success: true,
-    msg: '修改成功',
-    data: user
+    msg: Message.UPDATE_SUCCESS
   })
 })
 
@@ -61,6 +62,6 @@ exports.deleteUser = AsyncHandler(async (req, res, next) => {
   }
   res.send({
     success: true,
-    msg: '删除成功'
+    msg: Message.DELETE_SUCCESS
   })
 })

@@ -1,5 +1,5 @@
 const ErrorResponse = require('../utils/errorResponse')
-const ResponseStatus = require('../common/responseStatus')
+const ResponseStatus = require('../common/status')
 
 const errorHandler = (err, req, res, next) => {
   // 打印error相关信息
