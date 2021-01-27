@@ -7,7 +7,7 @@ dotenv.config({
   path: `${process.cwd()}/.env`
 })
 
-const Demo = require('./model/demo')
+const Demo = require('./model/user')
 
 mongoose.connect(process.env.LOC_MONGO_URI, {
   useNewUrlParser: true,
